@@ -1,6 +1,8 @@
 package com.jbh.lib;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,6 +71,7 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
     private LocatedCity mLocatedCity;
     private int locateState;
     private OnPickListener mOnPickListener;
+    Dialog dialog;
 
     /**
      * 获取实例
@@ -99,11 +103,11 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
         dbManager = new DBManager(getContext());
         mAllCities = dbManager.getAllCities();
         mAllCities.add(0, mLocatedCity);
-        if (mLatelyCities!=null&&mLatelyCities.size()>0){
+        if (mLatelyCities != null && mLatelyCities.size() > 0) {
             mAllCities.add(1, new LatelyCity("最近访问的城市", "未知", "0"));
             mAllCities.add(2, new HotCity("热门城市", "未知", "0"));
 
-        }else {
+        } else {
             mAllCities.add(1, new HotCity("热门城市", "未知", "0"));
         }
         mResults = mAllCities;
@@ -165,10 +169,10 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new SectionItemDecoration(getActivity(), mAllCities), 0);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()), 1);
-        if (mLatelyCities!=null&&mLatelyCities.size()>0){
-            mAdapter = new CityListAdapter(getActivity(), mAllCities, mHotCities, mLatelyCities,locateState);
+        if (mLatelyCities != null && mLatelyCities.size() > 0) {
+            mAdapter = new CityListAdapter(getActivity(), mAllCities, mHotCities, mLatelyCities, locateState);
 
-        }else{
+        } else {
             mAdapter = new CityListAdapter(getActivity(), mAllCities, mHotCities, locateState);
 
         }
@@ -206,7 +210,7 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog = super.onCreateDialog(savedInstanceState);
         Window window = dialog.getWindow();
         if (window != null) {
             window.getDecorView().setPadding(0, 0, 0, 0);
@@ -216,6 +220,17 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
                 window.setWindowAnimations(mAnimStyle);
             }
         }
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface mDialog) {
+                try {
+                    InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    manager.hideSoftInputFromWindow(dialog.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return dialog;
     }
 
