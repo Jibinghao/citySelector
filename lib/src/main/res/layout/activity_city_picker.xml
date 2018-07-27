@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:id="@+id/iv_close"
+            android:paddingTop="10dp"
+            android:src="@mipmap/ic_close" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="选择城市"
+            android:textColor="@color/text_black_333"
+            android:textSize="19sp"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/corners_gray_bg_with_5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cp_search_box"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/cp_color_section_bg"
+            android:hint="?attr/cpSearchHintText"
+            android:maxLength="10"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@mipmap/ic_edit_city"
+            android:maxLines="1"
+            android:layout_marginLeft="10dp"
+            android:paddingBottom="6dp"
+            android:paddingRight="10dp"
+            android:paddingTop="6dp"
+            android:textColor="?attr/cpSearchTextColor"
+            android:textColorHint="?attr/cpSearchHintTextColor"
+            android:textCursorDrawable="?attr/cpSearchCursorDrawable"
+            android:textSize="?attr/cpSearchTextSize" />
+
+        <ImageView
+            android:id="@+id/cp_clear_all"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="?attr/cpClearTextIcon"
+          />
+    </LinearLayout>
+    <!--<include layout="@layout/cp_search_view" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cp_city_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <TextView
+            android:id="@+id/cp_overlay"
+            android:layout_width="?attr/cpOverlayWidth"
+            android:layout_height="?attr/cpOverlayHeight"
+            android:layout_centerInParent="true"
+            android:background="?attr/cpOverlayBackground"
+            android:gravity="center"
+            android:textColor="?attr/cpOverlayTextColor"
+            android:textSize="?attr/cpOverlayTextSize"
+            android:visibility="gone" />
+
+        <!--右侧字母导航-->
+        <com.jbh.lib.view.SideIndexBar
+            android:id="@+id/cp_side_index_bar"
+            android:layout_width="@dimen/cp_index_bar_width"
+
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+        <include layout="@layout/cp_empty_view" />
+    </RelativeLayout>
+</LinearLayout>
