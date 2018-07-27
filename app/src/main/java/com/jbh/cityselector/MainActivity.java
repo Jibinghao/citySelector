@@ -27,11 +27,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 List<HotCity> hotCities = new ArrayList<>();
-                hotCities.add(new HotCity("北京", "北京", "101010100"));
-                hotCities.add(new HotCity("上海", "上海", "101020100"));
-                hotCities.add(new HotCity("广州", "广东", "101280101"));
-                hotCities.add(new HotCity("深圳", "广东", "101280601"));
-                hotCities.add(new HotCity("杭州", "浙江", "101210101"));
+
+                hotCities.add(new HotCity("北京", "", ""));
+                hotCities.add(new HotCity("上海", "", ""));
+                hotCities.add(new HotCity("广州", "", ""));
+                hotCities.add(new HotCity("深圳", "", ""));
+                hotCities.add(new HotCity("成都", "", ""));
+                hotCities.add(new HotCity("西安", "", ""));
+
                 List<LatelyCity> latelyCities = new ArrayList<>();
                 latelyCities.add(new LatelyCity("广州", "广东", "101280101"));
                 latelyCities.add(new LatelyCity("深圳", "广东", "101280601"));
