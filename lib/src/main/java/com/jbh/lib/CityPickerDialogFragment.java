@@ -220,17 +220,6 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
                 window.setWindowAnimations(mAnimStyle);
             }
         }
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface mDialog) {
-                try {
-                    InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    manager.hideSoftInputFromWindow(dialog.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         return dialog;
     }
 
@@ -291,6 +280,12 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
 
     @Override
     public void dismiss(int position, City data) {
+        try {
+            InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(dialog.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         dismiss();
         if (mOnPickListener != null) {
             mOnPickListener.onPick(position, data);
