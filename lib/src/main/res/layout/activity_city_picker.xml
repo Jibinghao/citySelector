@@ -64,6 +64,7 @@
             android:layout_marginLeft="10dp"
             android:paddingBottom="6dp"
             android:paddingRight="10dp"
+            android:singleLine="true"
             android:paddingTop="6dp"
             android:textColor="?attr/cpSearchTextColor"
             android:textColorHint="?attr/cpSearchHintTextColor"
